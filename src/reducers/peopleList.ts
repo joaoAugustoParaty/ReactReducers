@@ -20,10 +20,12 @@ const reducer = (state: Person[], action: ActionType) => {
     switch(action.type){
         case 'ADD':
             if(action.payload?.name){
+                const newState = [...state];
            state.push({
                id: uuidv4(),
                name: action.payload?.name
-           })
+           });
+           return newState;
         }
         break;
         case 'DEL':
@@ -41,5 +43,6 @@ const reducer = (state: Person[], action: ActionType) => {
 }
 
 export const usePeopleList = () =>{
+    return useReducer(reducer, initialState);
 
 }
